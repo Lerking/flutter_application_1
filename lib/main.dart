@@ -1,5 +1,21 @@
 import 'package:flutter/material.dart';
-import 'constants.dart' as Constants;
+
+const backgroundAzure = Color(0xFFF0FFFF);
+const alBlue = Color(0xFF11387F);
+const alBlueDark = Color(0xFF1138C8);
+const greyishBrown = Color(0xFF3D3935);
+const greyishWhite = Color(0xFFFBFBFB);
+const focusGreen = Color(0xFF04AA6D);
+
+const List<Widget> navigators = <Widget>[
+  Text('Home'),
+  Text('Lead time'),
+  Text('Load factor'),
+  Text('Production site'),
+  Text('ALSIS code'),
+  Text('Taxonomy code'),
+  Text('News')
+];
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        scaffoldBackgroundColor: Constants.backgroundAzure,
+        scaffoldBackgroundColor: backgroundAzure,
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -60,6 +76,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle style = TextButton.styleFrom(
+      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+    );
+    final List<bool> _selectedNavigator = <bool>[
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ];
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -70,8 +98,29 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-        backgroundColor: Constants.alBlue,
+
+        actions: <Widget>[
+          ToggleButtons(
+            onPressed: (int index) {
+              setState(() {
+                // The button that is tapped is set to true, and the others to false.
+                for (int i = 0; i < _selectedNavigator.length; i++) {
+                  _selectedNavigator[i] = i == index;
+                }
+              });
+            },
+            selectedColor: greyishWhite,
+            fillColor: focusGreen,
+            color: greyishWhite,
+            constraints: const BoxConstraints(
+              minHeight: 60.0,
+              minWidth: 80.0,
+            ),
+            isSelected: _selectedNavigator,
+            children: navigators,
+          ),
+        ],
+        backgroundColor: alBlue,
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
