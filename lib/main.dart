@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'constants.dart' as Constants;
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        scaffoldBackgroundColor: Constants.backgroundAzure,
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -50,14 +52,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  void _incrementCounter(int amount) {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _counter += amount;
     });
   }
 
@@ -74,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        backgroundColor: Constants.alBlue,
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -95,6 +93,39 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            ButtonTheme(
+              buttonColor: Colors.red,
+              child: ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  //TODO: talk about how the buttons will convert from row to column if exceeds width
+                  ElevatedButton(
+                    child: Text('1'),
+                    onPressed: () {
+                      _incrementCounter(1);
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('2'),
+                    onPressed: () {
+                      _incrementCounter(2);
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('3'),
+                    onPressed: () {
+                      _incrementCounter(3);
+                    },
+                  ),
+                  ElevatedButton(
+                    child: Text('4'),
+                    onPressed: () {
+                      _incrementCounter(4);
+                    },
+                  ),
+                ],
+              ),
+            ),
             const Text(
               'You have pushed the button this many times:',
             ),
@@ -106,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => _incrementCounter(1),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
