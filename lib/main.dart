@@ -142,6 +142,26 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            ToggleButtons(
+              onPressed: (int index) {
+                setState(() {
+                  // The button that is tapped is set to true, and the others to false.
+                  for (int i = 0; i < _selectedNavigator.length; i++) {
+                    _selectedNavigator[i] = i == index;
+                  }
+                });
+              },
+              selectedBorderColor: alBlueDark,
+              selectedColor: greyishWhite,
+              fillColor: focusGreen,
+              color: greyishWhite,
+              constraints: const BoxConstraints(
+                minHeight: 60.0,
+                minWidth: 80.0,
+              ),
+              isSelected: _selectedNavigator,
+              children: navigators,
+            ),
             ButtonTheme(
               buttonColor: Colors.red,
               child: ButtonBar(
